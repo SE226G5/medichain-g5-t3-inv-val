@@ -1,100 +1,221 @@
-﻿# Software Requirements Specification (SRS)
-## Project: [Insert the Parent System Name, e.g., Hospital ERP System]
-## Module/Subsystem: [Insert Your Module Name, e.g., Laboratory Management, Clinical System, OR "Master Integration System" if you are the integration team]
+# Software Requirements Specification (SRS)
+
+## Project: نظام تخطيط موارد المؤسسة (ERP) للمستشفيات
+## Module/Subsystem: نظام إدارة المختبرات الكيماوية
 **Version:** 1.0  
-**Date:** [YYYY-MM-DD]
+**Date:** 2026-05-12
 
 ---
 
 ## 1. Introduction
 ### 1.1 Purpose
-* **Instruction:** Describe the specific purpose of this document. Who is the intended audience? If you are a subsystem team, explain how this document defines your specific module. If you are the Integration Team (Team Leaders), explain how this document governs the entire system.
+تهدف هذه الوثيقة إلى تحديد المتطلبات البرمجية لموديول **نظام إدارة المختبرات الكيماوية**، والذي يعتبر جزءاً لا يتجزأ من نظام تخطيط موارد المؤسسة (ERP) الأكبر. الغرض الأساسي هو ربط إجراء التحاليل بتوفر المواد الأولية وصلاحيتها، لضمان دقة النتائج وكفاءة إدارة المخزون. تستهدف هذه الوثيقة فرق التطوير، الاختبار، وإدارة المشروع لضمان فهم مشترك للمتطلبات.
 
 ### 1.2 Scope
-* **Instruction:** Define the boundaries of your system. 
-  * What are the core goals and benefits?
-  * **Crucial:** Explicitly list what your system *will* do and what it *will NOT* do to prevent overlap with other teams.
+يختص هذا النظام بإدارة العمليات داخل المختبرات الكيميائية والطبية التي تعتمد على المواد الكيميائية في تنفيذ التحاليل. 
+*   **ما سيفعله النظام:**
+    *   إدارة وتتبع المخزون من المواد الكيماوية والدفعات (Batches).
+    *   التحقق اللحظي من صلاحية وتوفر المواد قبل بدء التحاليل.
+    *   خصم الكميات المستهلكة تلقائياً من المخزون بعد انتهاء التحاليل.
+    *   توفير تنبيهات حول انتهاء صلاحية المواد الكيماوية.
+    *   دعم التكامل مع نظام الـ ERP الأب لمزامنة بيانات المستودع والتكاليف.
+    *   دعم واجهات المستخدم لأدوار المحلل المخبري، مدير المستودع، ومدير المختبر.
+*   **ما لن يفعله النظام:**
+    *   لن يقوم بإدارة الجوانب المحاسبية الكاملة للمؤسسة (فهذه مسؤولية نظام الـ ERP).
+    *   لن يقوم بإدارة الموارد البشرية أو كشوف المرتبات.
+    *   لن يوفر وظائف إدارة المرضى أو السجلات الطبية الإلكترونية (EMR) بشكل مباشر.
 
 ### 1.3 Definitions, Acronyms, and Abbreviations
-* **Instruction:** Provide a table defining all technical terms, acronyms, or domain-specific language (e.g., medical terms, API, ERP) used in this document so all teams share a common understanding.
+| المصطلح | التعريف |
+| :------ | :------- |
+| **SRS** | Software Requirements Specification - وثيقة مواصفات متطلبات البرمجيات. |
+| **ERP** | Enterprise Resource Planning - نظام تخطيط موارد المؤسسة (النظام الأب الذي يتبعه المختبر). |
+| **Batch** | "الدُفعة" - كمية محددة من المادة الكيماوية يتم شراؤها معاً ولها تاريخ صلاحية واحد. |
+| **ERD** | Entity Relationship Diagram - مخطط يوضح جداول قاعدة البيانات والعلاقات بينها. |
+| **Actor** | "الممثل" - أي شخص أو نظام خارجي يتفاعل مع نظام المختبر (مثل المحلل أو المدير). |
+| **DSS** | Decision Support System - نظام دعم القرار الذي يساعد المدير في اتخاذ قرار (التحويل أو التأجيل). |
+| **API** | Application Programming Interface - واجهة برمجة التطبيقات لربط موديول المختبر مع الأنظمة الأخرى. |
 
 ### 1.4 References
-* **Instruction:** List all referenced documents. This must include:
-  * IEEE 830 Standard.
-  * Links to shared architectural documents or API contracts agreed upon with the Integration Team.
+*   معيار IEEE 830-1998: الممارسة الموصى بها لمواصفات متطلبات البرمجيات.
+*   وثيقة تكامل النظام (System Integration Document): الاتفاقيات المبرمجة مع فريق الـ ERP لضمان توافق البيانات.
+*   دليل إدارة المختبرات القياسي: لضمان مطابقة النظام لقواعد السلامة والصلاحية الكيماوية.
+*   مستودع GitHub الخاص بالمشروع.
 
 ### 1.5 Overview
-* **Instruction:** Briefly explain how the rest of this SRS document is organized.
+تتكون هذه الوثيقة من أربعة أقسام رئيسية. يقدم القسم الأول (المقدمة) نظرة عامة على الغرض والنطاق والتعريفات والمراجع. يصف القسم الثاني (الوصف العام) منظور المنتج، واجهاته المختلفة، ووظائفه الرئيسية، وخصائص المستخدمين، والقيود العامة. يتناول القسم الثالث (المتطلبات المحددة) المتطلبات الوظيفية في شكل قصص مستخدمين، بالإضافة إلى متطلبات الأداء وقاعدة البيانات وسمات النظام. أخيراً، يحتوي القسم الرابع (الملاحق) على أي مخططات أو وثائق داعمة. 
 
 ---
 
 ## 2. Overall Description
 ### 2.1 Product Perspective
-* **Instruction:** Explain how your software fits into the bigger picture. 
-  * **For Subsystem Teams:** State clearly that your module is a component of a larger system. How does it interact with the master database or other modules?
-  * **For the Integration Team:** Provide the high-level block diagram showing all subsystems and their connection points.
+يعتبر موديول **جودة وتخزين المواد الكيماوية** المكون الأساسي لضمان سلامة العمليات المخبرية ضمن نظام الـ ERP الأكبر. لا يعمل النظام كأداة تسجيل فقط، بل كمنظومة رقابية تربط بين توفر المخزون وبين صلاحية التنفيذ. وظيفته الأساسية هي التحقق من جودة المواد قبل استهلاكها في أي تحليل، وضمان التحديث اللحظي للكميات. يتفاعل هذا الموديول بشكل وثيق مع قاعدة البيانات الرئيسية لنظام الـ ERP ومع موديولات أخرى مثل المحاسبة والمشتريات.
 
-*   **2.1.1 System Interfaces:** [List the exact integration points and APIs your module exposes to, or consumes from, other teams].
-*   **2.1.2 User Interfaces:** [Describe the logical characteristics of your UI. Are you following a shared design system?].
-*   **2.1.3 Hardware Interfaces:** [List any required hardware, e.g., barcode scanners for labs, or state "None"].
-*   **2.1.4 Software Interfaces:** [Specify OS requirements, database dependencies, or third-party libraries].
-*   **2.1.5 Communications Interfaces:** [Define networking protocols used, e.g., HTTP/REST, WebSockets].
-*   **2.1.6 Memory & Operational Constraints:** [State minimum RAM, storage, and normal operating assumptions].
+*   **2.1.1 System Interfaces:**
+    *   **التكامل مع نظام الـ ERP:** توفير واجهة برمجية (API) لربط بيانات المستودع مع النظام المحاسبي العام للمؤسسة لضمان مزامنة التكاليف والكميات.
+    *   **التواصل مع قاعدة البيانات:** واجهة الربط بين التطبيق وقاعدة بيانات SQL Server لإدارة عمليات الاستعلام والتخزين.
+
+*   **2.1.2 User Interfaces:**
+    سيتم تطوير نماذج أولية للشاشات (Screen Prototypes) وتقديم مخططات مرئية (Mockups) لكل من:
+    *   شاشة تسجيل الدخول الموحدة لجميع الأدوار.
+    *   لوحة تحكم مدير المختبر (إحصائيات وتنبيهات).
+    *   نموذج إدخال دفعات المواد (Batch Entry Form) مع حقول التواريخ والكميات.
+    *   قائمة الفحص (Checklist) للمحلل المخبري لاختيار المواد قبل التحليل.
+    *   **صيغ الرسائل والإشعارات:**
+        *   رسائل النجاح: "تم خصم الكميات وتحديث المخزون بنجاح" عند انتهاء التحليل.
+        *   رسائل التحذير: "تنبيه: المادة [اسم المادة] قريبة من انتهاء الصلاحية".
+        *   رسائل الخطأ: "عذراً، لا يمكن بدء التحليل؛ المادة [اسم المادة] منتهية الصلاحية."
+
+*   **2.1.3 Hardware Interfaces:**
+    *   يدعم التوافق مع أجهزة قراءة الباركود (Barcode Scanners) لتسريع عملية جرد وإدخال المواد الكيماوية.
+    *   يدعم النظام العمل على أجهزة الكمبيوتر المكتبية والمحمولة (Laptops) لموظفي المختبر والمستودع.
+
+*   **2.1.4 Software Interfaces:**
+    *   **نظام التشغيل:** يتوافق النظام مع المتصفحات الحديثة (Chrome, Edge, Firefox) على بيئة Windows.
+    *   **قاعدة البيانات:** التفاعل مع قاعدة بيانات SQL Server لتخزين واسترجاع بيانات المواد والتحاليل.
+    *   **التكامل مع ERP:** واجهة برمجية لربط بيانات المستودع مع النظام المحاسبي العام للمؤسسة.
+
+*   **2.1.5 Communications Interfaces:**
+    *   بروتوكول HTTP/HTTPS لتأمين نقل البيانات بين المتصفح والخادم.
+    *   خدمة البريد الإلكتروني (SMTP) لإرسال تقارير دورية لمدير المختبر عن حالة المخزون.
+
+*   **2.1.6 Memory & Operational Constraints:**
+    *   **ذاكرة النظام (RAM):** يجب أن يعمل النظام بكفاءة على أجهزة لا تقل ذاكرتها العشوائية (RAM) عن 4GB (لضمان سرعة تحميل المتصفح وقاعدة البيانات).
+    *   **التخزين (Storage):** يجب توفير مساحة تخزين لا تقل عن 10GB بشكل مبدئي على السيرفر لتخزين سجلات التحاليل وبيانات الدفعات (Batches).
+    *   **العمليات المتزامنة (Concurrency):** يجب أن يدعم النظام عمل 20 مستخدم في نفس اللحظة (محللين ومدراء) دون التأثير على سرعة الاستجابة.
+    *   **التوافر (Availability):** يجب أن يعمل النظام بنسبة 99% خلال ساعات دوام المختبر الرسمية، مع جدولة عمليات النسخ الاحتياطي (Backup) في ساعات خارج الذروة.
 
 ### 2.2 Product Functions
-* **Instruction:** Provide a high-level, bulleted summary of the major functions your software performs. Do not go into deep detail here (save it for Section 3).
+فيما يلي ملخص للوظائف الرئيسية التي سيقدمها نظام إدارة المختبرات الكيماوية:
+*   إدارة وتحديث بيانات المخزون والدفعات (Batches) من المواد الكيماوية.
+*   التحقق اللحظي من توفر وصلاحية المواد الكيماوية قبل بدء أي تحليل.
+*   الخصم التلقائي للكميات المستهلكة من المخزون عند تسجيل نتائج التحاليل.
+*   توفير آليات للتنبيه عند اقتراب انتهاء صلاحية المواد الخطرة.
+*   دعم عملية تحويل التحاليل إلى مختبرات أخرى في حال نقص المواد.
 
 ### 2.3 User Characteristics
-* **Instruction:** Who will use your specific module? (e.g., Lab Technicians, Doctors, System Admins). Describe their technical expertise level.
+يستهدف النظام الفئات التالية من المستخدمين، مع مستويات مختلفة من الصلاحيات والخبرة التقنية:
+*   **محلل مخبري:** يقوم بتنفيذ التحاليل، تسجيل النتائج، ومتابعة توفر المواد. يُفترض أن لديه تدريب أساسي على استخدام المتصفحات وأجهزة قراءة الباركود.
+*   **مدير المستودع:** مسؤول عن إدخال المواد الجديدة، تحديث كمياتها، ومراقبة تواريخ الصلاحية. يُفترض أن لديه تدريب أساسي على استخدام المتصفحات وأجهزة قراءة الباركود.
+*   **مدير المختبر:** يمتلك صلاحية اعتماد النتائج، اتخاذ القرارات الإدارية، ومراقبة التقارير والإحصائيات. يُفترض أن لديه خبرة جيدة في استخدام الأنظمة الحاسوبية.
 
 ### 2.4 Constraints, Assumptions, and Dependencies
-* **Instruction:** List any factors that limit your development (e.g., medical data privacy laws, reliance on another team finishing their API first, specific coding languages mandated).
+#### 2.4.1 القيود (Constraints)
+*   **الأمن والخصوصية:** يجب تشفير كلمات مرور المستخدمين. لا يجوز للمحلل المخبري الوصول إلى سجلات المشتريات أو تعديل كميات المستودع يدوياً.
+*   **قوانين البيانات:** يجب أن يتوافق النظام مع معايير السلامة المهنية، بما في ذلك التنبيه عند اقتراب انتهاء صلاحية المواد الكيماوية الخطرة.
+*   **لغة النظام:** الواجهات ستكون باللغة العربية/الإنجليزية، مع دعم كامل للترميز العالمي UTF-8.
+
+#### 2.4.2 الافتراضات (Assumptions)
+*   يُفترض أن جميع المستخدمين لديهم تدريب أساسي على استخدام المتصفحات وأجهزة قراءة الباركود.
+*   يُفترض وجود اتصال دائم ومستقر بشبكة الإنترنت/الشبكة الداخلية للوصول إلى قاعدة بيانات الـ ERP المركزية.
+
+#### 2.4.3 الارتباطات (Dependencies)
+*   يعتمد النظام بشكل كلي على فريق التكامل (Integration Team) لتزويدنا بـ API خاص ببيانات الموظفين وصلاحياتهم.
+*   يعتمد بدء العمل على واجهة النتائج على استلام "قائمة المواد الكيماوية" النهائية من قسم المشتريات.
 
 ---
 
 ## 3. Specific Requirements (Agile Approach)
-* **Instruction:** This section translates traditional functional requirements into Agile User Stories. Every feature must be traceable to the project management board.
+هذا القسم يترجم المتطلبات الوظيفية التقليدية إلى قصص مستخدمين (User Stories) ضمن منهجية Agile، مع إمكانية ربطها بمهام في نظام إدارة المشاريع (مثل GitHub Issues).
 
 ### 3.1 External Interface Requirements
-* **Instruction:** Detail the exact data formats, API endpoints, and UI layouts needed for the interfaces mentioned in section 2.1.
+*   **واجهة برمجة تطبيقات (API) لنظام ERP:**
+    *   **الغرض:** مزامنة بيانات المخزون، التكاليف، وكميات المواد الكيماوية مع النظام المحاسبي العام للمؤسسة.
+    *   **نقطة النهاية (Endpoint):** سيتم تحديدها بالتعاون مع فريق التكامل (Integration Team).
+    *   **طريقة الاتصال:** RESTful API عبر بروتوكول HTTPS.
+    *   **تنسيق البيانات:** JSON.
+    *   **المصادقة:** OAuth 2.0 أو مفتاح API (سيتم تحديده لاحقاً).
+*   **واجهة قاعدة بيانات SQL Server:**
+    *   **الغرض:** إدارة عمليات الاستعلام والتخزين لبيانات المواد، الدفعات، والتحاليل.
+    *   **الاتصال:** عبر ADO.NET أو JDBC (حسب لغة التطوير).
+    *   **الاستعلامات:** استخدام T-SQL لضمان الكفاءة والأمان.
 
 ### 3.2 System Features & User Stories
-* **Instruction:** Organize your requirements by Feature. For each feature, write the underlying requirements as User Stories and link them to your GitHub Issues.
 
-#### 3.2.1 Feature: [Insert Feature Name, e.g., Patient Registration]
-*   **Description:** [Briefly describe the feature].
-*   **Priority:** [High / Medium / Low].
+#### 3.2.1 Feature: إدارة المخزون والدفعات
+*   **Description:** تتيح هذه الميزة لمدير المستودع إدخال وتتبع المواد الكيماوية ودفعاتها، بما في ذلك تواريخ الصلاحية والكميات، لضمان دقة المخزون ومنع استخدام المواد منتهية الصلاحية.
+*   **Priority:** High.
 *   **User Stories:**
-    *   **Story 1:** As a [User Role], I want to [Action/Goal] so that [Benefit/Value]. 
-        * *Acceptance Criteria:* [List what must be true for this to be considered 'Done'].
-        * *GitHub Issue:* [Link to Issue, e.g., #12]
-    *   **Story 2:** As a [User Role], I want to [Action/Goal] so that [Benefit/Value].
-        * *Acceptance Criteria:* [List criteria].
-        * *GitHub Issue:* [Link to Issue, e.g., #13]
+    *   **Story 1:** بصفتي مدير مستودع، أريد إدخال دفعات المواد الكيماوية الجديدة مع تاريخ صلاحيتها، لكي يمنع النظام استخدام المواد المنتهية الصلاحية ويحدث كمية المواد المتاحة.
+        *   *Acceptance Criteria:* يجب أن يتمكن النظام من تسجيل دفعة جديدة بنجاح، وتخزين تاريخ الصلاحية والكمية. يجب أن يقوم النظام بتنبيه المستخدم إذا حاول إدخال تاريخ صلاحية سابق. يجب أن تظهر الدفعة في قائمة المخزون المتاحة.
+        *   *GitHub Issue:* #LAB-001
+    *   **Story 2:** بصفتي مدير مستودع، أريد تحديث كمية مادة كيماوية موجودة، لكي تعكس التغييرات في المخزون بدقة.
+        *   *Acceptance Criteria:* يجب أن يتمكن النظام من تعديل الكمية المتاحة لدفعة معينة. يجب أن يتم تحديث المخزون الكلي للمادة تلقائياً.
+        *   *GitHub Issue:* #LAB-002
 
-#### 3.2.2 Feature: [Insert Feature Name]
-*   [Repeat the structure above for all module features].
+#### 3.2.2 Feature: التحقق من صلاحية وتوفر المواد قبل التحليل
+*   **Description:** تضمن هذه الميزة أن المحلل المخبري يستخدم فقط المواد الكيماوية الصالحة والمتوفرة، مما يقلل من الأخطاء ويزيد من موثوقية النتائج.
+*   **Priority:** High.
+*   **User Stories:**
+    *   **Story 1:** بصفتي محلل مخبري، أريد التحقق من توفر وصلاحية المواد الكيماوية المطلوبة قبل بدء التحليل، لكي أتجنب استخدام مواد منتهية الصلاحية أو غير متوفرة.
+        *   *Acceptance Criteria:* يجب أن يعرض النظام حالة توفر وصلاحية المادة فوراً عند اختيارها. يجب أن يمنع النظام بدء التحليل إذا كانت المادة غير متوفرة أو منتهية الصلاحية ويعرض رسالة خطأ واضحة.
+        *   *GitHub Issue:* #LAB-003
+    *   **Story 2:** بصفتي محلل مخبري، أريد أن يقوم النظام بخصم الكميات المستخدمة تلقائياً من المخزون عند تسجيل نتائج التحليل، لكي يتم تحديث المخزون بدقة وآنية.
+        *   *Acceptance Criteria:* يجب أن يتم خصم الكمية المحددة من الدفعة الصحيحة بعد تسجيل النتائج بنجاح. يجب أن تظهر رسالة تأكيد بنجاح عملية الخصم وتحديث المخزون.
+        *   *GitHub Issue:* #LAB-004
+
+#### 3.2.3 Feature: دعم القرار لمدير المختبر
+*   **Description:** توفر هذه الميزة لمدير المختبر الأدوات اللازمة لاتخاذ قرارات مستنيرة، مثل تحويل التحاليل عند نقص المواد، ومراقبة حالة المخزون.
+*   **Priority:** Medium.
+*   **User Stories:**
+    *   **Story 1:** بصفتي مدير مختبر، أريد تحويل التحليل لمخبر آخر عند نقص المواد، لكي لا يتوقف العمل ويتم تقديم الخدمة للمرضى دون تأخير.
+        *   *Acceptance Criteria:* يجب أن يوفر النظام واجهة لمدير المختبر لتحديد تحليل معين وتحويله إلى مختبر بديل. يجب أن يتم تسجيل عملية التحويل في سجلات النظام.
+        *   *GitHub Issue:* #LAB-005
+    *   **Story 2:** بصفتي مدير مختبر، أريد استلام تقارير دورية عبر البريد الإلكتروني عن حالة المخزون وتواريخ صلاحية المواد، لكي أتمكن من اتخاذ قرارات الشراء والتخطيط بفعالية.
+        *   *Acceptance Criteria:* يجب أن يرسل النظام تقارير مخصصة (يومية/أسبوعية) إلى البريد الإلكتروني لمدير المختبر. يجب أن تتضمن التقارير معلومات عن المواد القريبة من انتهاء الصلاحية والمواد ذات المخزون المنخفض.
+        *   *GitHub Issue:* #LAB-006
 
 ### 3.3 Performance Requirements
-* **Instruction:** Specify quantitative limits. (e.g., "The module must return query results in under 2 seconds for up to 50 concurrent users").
+*   **سرعة الاستجابة:** يجب أن يتم خصم الكمية من المخزون فوراً (Real-time) عند تسجيل نتائج التحليل.
+*   **سرعة البحث:** يجب ألا تستغرق عملية البحث عن مادة كيماوية في المخزون أكثر من ثانيتين.
+*   **العمليات المتزامنة:** يجب أن يدعم النظام عمل 20 مستخدم في نفس اللحظة (محللين ومدراء) دون التأثير على سرعة الاستجابة.
 
 ### 3.4 Logical Database Requirements
-* **Instruction:** Describe the data entities managed by your module. If you are using a shared database, specify which tables your team is responsible for. (Include ERD models in the Appendix).
+سيعتمد النظام على قاعدة بيانات SQL Server، وستتضمن الجداول الرئيسية التالية:
+
+| الجدول | الوصف | الحقول الرئيسية (أمثلة) |
+| :------ | :---- | :--------------------- |
+| **Users** | لتخزين معلومات المستخدمين وصلاحياتهم. | UserID (PK), Username, Password (مشفر), RoleID |
+| **Materials** | لتخزين معلومات المواد الكيماوية العامة. | MaterialID (PK), MaterialName, UnitOfMeasure |
+| **Batches** | لتخزين تفاصيل دفعات المواد الكيماوية. | BatchID (PK), MaterialID (FK), ExpiryDate, Quantity, Supplier |
+| **LabTests** | لتخزين معلومات التحاليل المخبرية. | TestID (PK), TestName, RequiredMaterials |
 
 ### 3.5 Software System Attributes
-* **Instruction:** Define the Non-Functional Requirements (NFRs) for your module:
-  * **Reliability:** [Acceptable failure rates].
-  * **Security:** [Authentication methods, data encryption protocols].
-  * **Maintainability & Portability:** [Coding standards, documentation rules].
+*   **Reliability (الموثوقية):**
+    *   يجب على النظام منع استخدام مادة منتهية الصلاحية للتحليل بشكل قاطع.
+    *   يجب أن يكون النظام متاحاً بنسبة 99% خلال ساعات دوام المختبر الرسمية.
+*   **Security (الأمان):**
+    *   يجب تشفير كلمات مرور المستخدمين باستخدام خوارزميات تشفير قوية.
+    *   يجب تأمين نقل البيانات بين المتصفح والخادم باستخدام بروتوكول HTTPS.
+*   **Maintainability (قابلية الصيانة):**
+    *   يجب كتابة الكود بشكل معياري (Modular) لتسهيل عملية التحديث والتطوير المستقبلي.
 
 ---
 
 ## 4. Appendices
 ### Appendix A: Glossary & Models
-* **Instruction:** Include any Data Flow Diagrams (DFDs), Entity-Relationship Diagrams (ERDs), or detailed UI Mockups here.
+
+*   **مخطط علاقات الكيانات (ERD):**
+    ![مخطط الكيان والعلاقة](../photo_2026-05-12_19-06-20.jpg)
+
+*   **مخطط تدفق العمليات (Process Flow Diagram):**
+    ![مخطط تدفق العمليات](../photo_2026-05-12_19-06-25.jpg)
+
+*   **مخطط حالة الاستخدام (Use Case Diagram):**
+    ![مخطط حالة الاستخدام](https://files.manuscdn.com/user_upload_by_module/session_file/310519663146132469/cWsyRPxRtQFLXtTr.png)
+
+*   **نماذج واجهات المستخدم (UI Mockups):**
+
+### شاشة تسجيل الدخول
+![شاشة تسجيل الدخول](../photo_2026-05-12_19-05-59.jpg)
+
+### لوحة تحكم مدير المختبر
+![لوحة تحكم مدير المختبر](../photo_2026-05-12_19-06-07.jpg)
+
+### نموذج إدخال دفعات المواد
+![نموذج إدخال دفعات المواد](../photo_2026-05-12_19-04-53.jpg)
 
 ### Appendix B: GitHub Traceability Checklist
-* **Instruction for Team Members:** Before submitting this SRS, ensure that:
-  * [ ] Every User Story in Section 3.2 has a corresponding GitHub Issue.
-  * [ ] Every GitHub Issue has an appropriate label (e.g., `enhancement`, `requirement`).
-  * [ ] Pull Requests reference the Issue IDs (e.g., `Closes #12`). 
+*   [ ] كل قصة مستخدم في القسم 3.2 لها مهمة (Issue) مقابلة في GitHub.
+*   [ ] كل مهمة في GitHub لها تصنيف مناسب (مثل `enhancement`, `requirement`).
+*   [ ] طلبات السحب (Pull Requests) تشير إلى معرفات المهام (مثلاً، `Closes #LAB-001`).
