@@ -216,6 +216,6 @@
 ![نموذج إدخال دفعات المواد](../photo_2026-05-12_19-04-53.jpg)
 
 ### Appendix B: GitHub Traceability Checklist
-*   [ ] كل قصة مستخدم في القسم 3.2 لها مهمة (Issue) مقابلة في GitHub.
-*   [ ] كل مهمة في GitHub لها تصنيف مناسب (مثل `enhancement`, `requirement`).
-*   [ ] طلبات السحب (Pull Requests) تشير إلى معرفات المهام (مثلاً، `Closes #LAB-001`).
+* [x] كل قصة مستخدم في القسم 3.2 لها مهمة (Issue) مقابلة في GitHub.
+* [x] كل مهمة في GitHub لها تصنيف مناسب (مثل enhancement, requirement).
+* [ ] طلبات السحب (Pull Requests) تشير إلى معرفات المهام (مثلاً، Closes #LAB-001).`Closes #LAB-001`).
