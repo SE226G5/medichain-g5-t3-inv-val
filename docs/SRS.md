@@ -202,7 +202,7 @@
     ![مخطط تدفق العمليات](../photo_2026-05-12_19-06-25.jpg)
 
 *   **مخطط حالة الاستخدام (Use Case Diagram):**
-    ![مخطط حالة الاستخدام](https://files.manuscdn.com/user_upload_by_module/session_file/310519663146132469/cWsyRPxRtQFLXtTr.png)
+    ![مخطط حالة الاستخدام](../photo_2026-05-12_19-06-20.jpg)
 
 *   **نماذج واجهات المستخدم (UI Mockups):**
 
