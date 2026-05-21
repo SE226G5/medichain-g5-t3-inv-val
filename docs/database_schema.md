@@ -1,8 +1,7 @@
 # Database Schema
 
 ## 1. Entity-Relationship Diagram (ERD)
-
-[../photo_2026-05-12_19-06-20.jpg]
+![ERD Diagram](../photo_2026-05-12_19-06-20.jpg)
 
 Main Relationships:
 - One Material has many Batches
