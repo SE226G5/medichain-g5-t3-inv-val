@@ -1,6 +1,7 @@
 # Database Schema
 
 ## 1. Entity-Relationship Diagram (ERD)
+
 ![ERD Diagram](../photo_2026-05-12_19-06-20.jpg)
 
 Main Relationships:
