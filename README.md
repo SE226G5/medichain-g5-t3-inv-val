@@ -14,11 +14,11 @@ Provide a brief description of what this module does based on the project text. 
 
 | Member Name | Primary Responsibility | Assigned Tasks (Examples) | GitHub Profile |
 | :--- | :--- | :--- | :--- |
-| **Nezar khoder** | Integration & Architecture | Component Diagrams, API Specs, Team Coordination | https://github.com/EngNezarKhoder |
-| **Hala Tarraf** | Requirements & Analysis | Functional Requirements, Use Case Diagrams |https://github.com/halatarraf |
-| **Heaven Fandi** | Process Modeling | Activity Diagrams, Business Rules Validation | https://github.com/HeavenFandi |
-| **Lana Ahmad** | Data Design | ERD, Database Schema, Class Diagrams |  https://github.com/lanayahmad |
-| **Nour Lolo** | Interaction Design | Sequence Diagrams, Logic Flow | https://github.com/nourlolo5233 |
+| **Nezar khoder** | Team Leadership & Cross-Group Coordination | Team Coordination, Cross-Group Communication, Data Verification & Quality Assurance | https://github.com/EngNezarKhoder |
+| **Hala Tarraf** |  Requirements Engineering & Specification | Functional & Non-Functional Requirements, SRS Document Compilation, Diagram Auditing |https://github.com/halatarraf |
+| **Heaven Fandi** |UI/UX Development & Git Management |UI/UX Design & Implementation, Frontend Web Views, GitHub Repository Uploads| https://github.com/HeavenFandi |
+| **Lana Ahmad** | Technical Documentation & Data Design |Database Schema, Supplementary Specifications, Supplementary Info in SRS |  https://github.com/lanayahmad |
+| **Nour Lolo** | System Modeling & Diagrams | System Architecture Diagrams, Use Case & Sequence Diagrams Design | https://github.com/nourlolo5233 |
 
 ---
 
