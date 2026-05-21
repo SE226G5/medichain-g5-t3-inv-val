@@ -1,23 +1,75 @@
-# مواصفات واجهة التطبيق (API) - مشروع INV-VAL
+# API Specifications
 
-## 1. عمليات المخزون (Inventory Endpoints)
+## 1. Overview
 
-### فحص صلاحية المواد (GET /api/inventory/check-validity)
-- الوصف: يتأكد النظام تلقائياً إذا كانت المواد المطلوبة متوفرة وغير منتهية الصلاحية قبل البدء بالتحليل.
-- الاستجابة: (مسموح) في حال مطابقة الشروط، أو (مرفوض) مع ذكر السبب.
+The INV-VAL module provides inventory validation and material availability checking for laboratory tests.
+The module ensures that laboratory tests cannot be performed using unavailable or expired chemical materials.
 
-### خصم المخزون (POST /api/inventory/deduct)
-- الوصف: تحديث رصيد المخزون تلقائياً بعد إدخال المحلل للنتائج.
+---
 
-## 2. عمليات إدارة المهام (Management Endpoints)
+## 2. Main Endpoints
 
-### تكليف المحلل (POST /api/tests/assign)
-- الوصف: يسمح لمدير المخبر بتوجيه طلب تحليل معين لمحلل محدد.
+### Endpoint 1: Check Material Availability
 
-### اعتماد النتائج (PUT /api/tests/validate-results)
-- الوصف: يسمح لمدير المخبر بالموافقة النهائية على النتائج لإصدار الشهادة الرسمية.
+- Method: GET
+- What it does:
+Checks whether the required material is available in stock.
 
-## 3. الإجراءات البديلة (Alternative Actions)
+- Required Data:
+  - MaterialID
+  - RequiredQuantity
 
-### تحويل الطلب (POST /api/tests/transfer)
-- الوصف: في حال نقص مادة (تنبيه من مدير المستودع)، يتم تحويل الطلب لمختبر خارجي أو تأجيله.
+- Returned Data:
+  - Availability Status
+  - Current Quantity
+
+---
+
+### Endpoint 2: Validate Material Expiration
+
+- Method: GET
+
+- What it does:
+Checks whether the chemical material batch is expired.
+
+- Required Data:
+  - BatchID
+
+- Returned Data:
+  - Expiration Status
+  - Expiry Date
+
+---
+
+### Endpoint 3: Consume Material Quantity
+
+- Method: POST
+
+- What it does:
+Deducts consumed material quantities after performing a laboratory test.
+
+- Required Data:
+  - BatchID
+  - ConsumedQuantity
+  - TestID
+
+- Returned Data:
+  - Updated Quantity
+  - Operation Status
+
+---
+
+### Endpoint 4: Generate Inventory Alert
+
+- Method: POST
+
+- What it does:
+Creates alerts for expired materials or low stock quantities.
+
+- Required Data:
+  - MaterialID
+  - AlertType
+
+- Returned Data:
+  - Alert Message
+  - Alert Status
