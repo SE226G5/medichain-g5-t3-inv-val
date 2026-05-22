@@ -197,7 +197,9 @@
 
 *   **مخطط علاقات الكيانات (ERD):**
     ![مخطط الكيان والعلاقة](../photo_2026-05-12_19-06-20.jpg)
+    
     ![مخطط الكيان والعلاقة](https://github.com/SE226G5/medichain-g5-t3-inv-val/blob/main/docs/ERD-diagram.md)
+
 *   **مخطط تدفق العمليات (Process Flow Diagram):**
     ![مخطط تدفق العمليات](../photo_2026-05-12_19-06-25.jpg)
 
