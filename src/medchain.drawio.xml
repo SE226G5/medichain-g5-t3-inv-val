@@ -1,0 +1,125 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="MediChain_Module3_Master_Component_Diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Components -->
+
+        <mxCell id="2" value="Analysis Request Component&#xa;Provided: IAnalysisRequest&#xa;Required: IMaterialValidation"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="520" y="40" width="320" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="3" value="Material Validation Component&#xa;Provided: IMaterialValidation&#xa;Required: IInventoryCheck, IExpiryValidation"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="480" y="200" width="400" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="4" value="Inventory Management Component&#xa;Provided: IInventoryCheck, IMaterialDeduction&#xa;Required: IDatabaseAccess"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="120" y="400" width="420" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="5" value="Feasibility Decision Engine&#xa;Provided: IFeasibilityDecision&#xa;Required: IMaterialValidation, ITransferService"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="700" y="400" width="420" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="6" value="Delay Processing"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="640" y="600" width="200" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="7" value="Inter-Lab Transfer Component&#xa;Provided: ITransferService&#xa;Required: ILabCommunication"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="930" y="580" width="350" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="8" value="Result Authorization Component&#xa;Provided: IResultAuthorization&#xa;Required: IMaterialAudit"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#3d85c6;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="430" y="760" width="450" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="9" value="Notification Component&#xa;Provided: INotificationService"
+        style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#cc0000;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="510" y="930" width="320" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="10" value="Central Database&#xa;Provided: IDatabaseAccess"
+        style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d9ead3;strokeColor=#6aa84f;fontSize=14;fontStyle=1;"
+        vertex="1" parent="1">
+          <mxGeometry x="1260" y="360" width="170" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Connections -->
+
+        <mxCell id="11" style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="12" value="requires IInventoryCheck"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="13" value="validation result"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="3" target="5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="14" value="delay decision"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="5" target="6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="15" value="transfer request"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="5" target="7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="16" value="material audit"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="4" target="8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="17" value="approval status"
+        style="endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="8" target="9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Database Connections -->
+
+        <mxCell id="18" value="inventory records"
+        style="dashed=1;endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="4" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="19" value="decision logs"
+        style="dashed=1;endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="5" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="20" value="authorization records"
+        style="dashed=1;endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="8" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="21" value="notifications"
+        style="dashed=1;endArrow=block;html=1;strokeWidth=2;" edge="1" parent="1" source="9" target="10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
