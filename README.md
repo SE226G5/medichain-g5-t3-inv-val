@@ -14,12 +14,11 @@ Provide a brief description of what this module does based on the project text. 
 
 | Member Name | Primary Responsibility | Assigned Tasks (Examples) | GitHub Profile |
 | :--- | :--- | :--- | :--- |
-| **Student 1 (Leader)** | Integration & Architecture | Component Diagrams, API Specs, Team Coordination | [Link] |
-| **Student 2** | Requirements & Analysis | Functional Requirements, Use Case Diagrams | [Link] |
-| **Student 3** | Process Modeling | Activity Diagrams, Business Rules Validation | [Link] |
-| **Student 4** | Data Design | ERD, Database Schema, Class Diagrams | [Link] |
-| **Student 5 (Optional)** | Interaction Design | Sequence Diagrams, Logic Flow | [Link] |
-| **Student 6 (Optional)** | UI/UX & Frontend | Wireframes, Interface Logic, User Stories | [Link] |
+| **Nezar khoder** | Team Leadership & Cross-Group Coordination | Team Coordination, Cross-Group Communication, Data Verification & Quality Assurance | https://github.com/EngNezarKhoder |
+| **Hala Tarraf** |  Requirements Engineering & Specification | Functional & Non-Functional Requirements, SRS Document Compilation, Diagram Auditing |https://github.com/halatarraf |
+| **Heaven Fandi** |UI/UX Development & Git Management |UI/UX Design & Implementation, Frontend Web Views, GitHub Repository Uploads| https://github.com/HeavenFandi |
+| **Lana Ahmad** | Technical Documentation & Data Design |Database Schema, Supplementary Specifications, Supplementary Info in SRS |  https://github.com/lanayahmad |
+| **Nour Lolo** | System Modeling & Diagrams | System Architecture Diagrams, Use Case & Sequence Diagrams Design | https://github.com/nourlolo5233 |
 
 ---
 
