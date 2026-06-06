@@ -16,7 +16,7 @@ Provide a brief description of what this module does based on the project text. 
 | :--- | :--- | :--- | :--- |
 | **Nezar khoder** | Team Leadership & Cross-Group Coordination | Team Coordination, Cross-Group Communication, Data Verification & Quality Assurance | https://github.com/EngNezarKhoder |
 | **Hala Tarraf** |  Requirements Engineering & Specification | Functional & Non-Functional Requirements, SRS Document Compilation, Diagram Auditing |https://github.com/halatarraf |
-| **Heaven Fandi** |UI/UX Development & Git Management |UI/UX Design & Implementation, Frontend Web Views, GitHub Repository Uploads,Test Feasibility Validation| https://github.com/HeavenFandi |
+| **Heaven Fandi** |UI/UX Development & Git Management |UI/UX Design & Implementation, Frontend Web Views, GitHub Repository Uploads,Validation Logic| https://github.com/HeavenFandi |
 | **Lana Ahmad** | Technical Documentation & Data Design |Database Schema, Supplementary Specifications, Supplementary Info in SRS |  https://github.com/lanayahmad |
 | **Nour Lolo** | System Modeling & Diagrams | System Architecture Diagrams, Use Case & Sequence Diagrams Design | https://github.com/nourlolo5233 |
 
