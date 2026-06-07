@@ -1,19 +1,18 @@
 public class MaterialAvailabilityChecker {
 
-    public static String checkMaterialAvailability(int availableQuantity, int requiredQuantity) {
+    public static String checkMaterialAvailability(
+            int availableQuantity,
+            int requiredQuantity) {
 
-        if (availableQuantity <= 0) {
+        if (requiredQuantity <= 0)
+            return "Invalid required quantity";
+
+        if (availableQuantity <= 0)
             return "Material not available";
-        } else {
-            if (requiredQuantity <= 0) {
-                return "Invalid required quantity";
-            } else {
-                if (availableQuantity >= requiredQuantity) {
-                    return "Material is available";
-                } else {
-                    return "Insufficient material quantity";
-                }
-            }
-        }
+
+        if (availableQuantity < requiredQuantity)
+            return "Insufficient material quantity";
+
+        return "Material is available";
     }
 }
