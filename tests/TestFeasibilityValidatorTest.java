@@ -1,23 +1,26 @@
-public class TestFeasibilityValidator {
+public class TestFeasibilityValidatorTest {
 
-    public static String validateTestFeasibility(
-            int availableQuantity,
-            int requiredQuantity,
-            boolean expired,
-            boolean alternativeLabAvailable) {
+    public static void main(String[] args) {
 
-        if (expired)
-            return "Reject test - material expired";
+        String test1 =
+                TestFeasibilityValidator.validateTestFeasibility(
+                        0, 10, false, true);
 
-        boolean unavailable =
-                availableQuantity <= 0 ||
-                availableQuantity < requiredQuantity;
+        String test2 =
+                TestFeasibilityValidator.validateTestFeasibility(
+                        0, 10, false, false);
 
-        if (unavailable)
-            return alternativeLabAvailable
-                    ? "Transfer to another lab"
-                    : "Postpone test";
+        String test3 =
+                TestFeasibilityValidator.validateTestFeasibility(
+                        20, 10, true, false);
 
-        return "Test approved";
+        String test4 =
+                TestFeasibilityValidator.validateTestFeasibility(
+                        20, 10, false, false);
+
+        System.out.println("Test 1: " + test1);
+        System.out.println("Test 2: " + test2);
+        System.out.println("Test 3: " + test3);
+        System.out.println("Test 4: " + test4);
     }
 }
